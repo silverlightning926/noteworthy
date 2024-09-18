@@ -6,12 +6,11 @@ class NoteIndicator extends StatelessWidget {
   final Notes note;
   final int octave;
 
-  NoteIndicator({
+  const NoteIndicator({
     super.key,
     required this.note,
     required this.octave,
-  }) : assert(
-            octave >= 0 && octave < note.frequencies.length, "Invalid octave");
+  }) : assert(octave >= 0 && octave <= 8, "Octave must be between 0 and 8");
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +45,7 @@ class NoteIndicator extends StatelessWidget {
           ],
         ),
         Text(
-          "${note.frequencies[octave]} Hz",
+          note != Notes.none ? "${note.frequencies[octave]} Hz" : "",
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.w400,

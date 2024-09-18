@@ -1,4 +1,7 @@
+import 'dart:math';
+
 enum Notes {
+  none(note: "-", frequencies: []),
   a(note: "A", frequencies: [
     27.5,
     55,
@@ -139,4 +142,40 @@ enum Notes {
 
   final String note;
   final List<double> frequencies;
+
+  static double calculateCents(double inputFrequency, double closestFrequency) {
+    return 1200 * log(inputFrequency / closestFrequency) / log(2);
+  }
+
+  static Map<String, dynamic> getClosestNoteAndOctaveFromFrequency(
+      double frequency) {
+    var closestNote = Notes.none;
+    var closestFrequency = -1.0;
+    var closestDistance = double.infinity;
+    int octave = -1;
+
+    for (final note in Notes.values) {
+      for (int i = 0; i < note.frequencies.length; i++) {
+        final noteFrequency = note.frequencies[i];
+        final distance = (noteFrequency - frequency).abs();
+
+        if (distance < closestDistance) {
+          closestNote = note;
+          closestFrequency = noteFrequency;
+          closestDistance = distance;
+          octave =
+              i;
+        }
+      }
+    }
+
+    int centsDeviation = calculateCents(frequency, closestFrequency).round();
+
+    return {
+      'note': closestNote,
+      'octave': octave,
+      'closestFrequency': closestFrequency,
+      'centsDeviation': centsDeviation,
+    };
+  }
 }
