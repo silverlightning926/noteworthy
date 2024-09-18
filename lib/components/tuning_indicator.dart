@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
 class TuningIndicator extends StatefulWidget {
-  final double value;
+  final int cents;
 
   const TuningIndicator({
     super.key,
-    required this.value,
-  });
+    required this.cents,
+  }) : assert(
+          cents > -100 && cents < 100,
+          "Cents must be between -100 and 100",
+        );
 
   @override
   State<TuningIndicator> createState() => _TuningIndicatorState();
@@ -47,27 +50,41 @@ class _TuningIndicatorState extends State<TuningIndicator> {
     }
 
     int highlightedIndex =
-        ((widget.value + 1) * (containerHeights.length - 1) / 2)
+        (((widget.cents / 100) + 1) * (containerHeights.length - 1) / 2)
             .clamp(0, containerHeights.length - 1)
             .toInt();
 
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: List.generate(
-        containerHeights.length,
-        (index) => Container(
-          height: containerHeights[index].toDouble(),
-          width: 5,
-          margin: const EdgeInsets.symmetric(horizontal: 10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            color: index == highlightedIndex
-                ? getColorForIndex(index)
-                : Colors.grey,
+    Color highlightColor = getColorForIndex(highlightedIndex);
+
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: List.generate(
+            containerHeights.length,
+            (index) => Container(
+              height: containerHeights[index].toDouble(),
+              width: 5,
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(5),
+                color: index == highlightedIndex ? highlightColor : Colors.grey,
+              ),
+            ),
           ),
         ),
-      ),
+        const SizedBox(height: 30),
+        Text(
+          "${widget.cents == 0 ? "" : widget.cents > 0 ? "+" : ""} ${widget.cents} cents",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.w500,
+            color: highlightColor,
+          ),
+        ),
+      ],
     );
   }
 }
