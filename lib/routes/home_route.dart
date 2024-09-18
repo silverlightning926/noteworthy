@@ -14,8 +14,8 @@ class HomeRoute extends StatefulWidget {
 class _HomeRouteState extends State<HomeRoute> {
   @override
   void dispose() {
-    super.dispose();
     stopRecording();
+    super.dispose();
   }
 
   @override

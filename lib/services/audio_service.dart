@@ -33,9 +33,7 @@ Stream<PitchDetectorResult> getPitchStream() async* {
   await for (final buffer in recordStream) {
     final intBuffer = Uint8List.fromList(buffer);
 
-    final pitch = await _pitchDetector.getPitchFromIntBuffer(intBuffer);
-
-    yield pitch;
+    yield await _pitchDetector.getPitchFromIntBuffer(intBuffer);
   }
 }
 
@@ -49,7 +47,10 @@ Stream getNoteStream() async* {
   }
 }
 
-void stopRecording() {
-  _audioRecorder.stop();
+Future<void> stopRecording() async {
+  if (await _audioRecorder.isRecording()) {
+    await _audioRecorder.stop();
+  }
+  await _audioRecorder.cancel();
   _audioRecorder.dispose();
 }
