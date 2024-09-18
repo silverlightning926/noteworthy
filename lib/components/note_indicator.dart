@@ -19,7 +19,7 @@ class NoteIndicator extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         EasyRichText(
-          "${note.note}${octave + 1}",
+          "${note.note}$octave",
           textAlign: TextAlign.center,
           defaultStyle: const TextStyle(
             fontSize: 175,
