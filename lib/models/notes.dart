@@ -1,6 +1,6 @@
 enum Notes {
   a(note: "A", frequencies: [440, 880, 1760, 3520, 7040, 14080, 28160, 56320]),
-  aSharp(note: "A#", frequencies: [
+  aSharp(note: "A♯", frequencies: [
     466.16,
     932.33,
     1864.66,
@@ -30,7 +30,7 @@ enum Notes {
     33488,
     66976,
   ]),
-  cSharp(note: "C#", frequencies: [
+  cSharp(note: "C♯", frequencies: [
     554.37,
     1108.73,
     2217.46,
@@ -50,7 +50,7 @@ enum Notes {
     37589.1,
     75168.2,
   ]),
-  dSharp(note: "D#", frequencies: [
+  dSharp(note: "D♯", frequencies: [
     622.25,
     1244.51,
     2489.02,
@@ -80,7 +80,7 @@ enum Notes {
     44701.2,
     89402.4,
   ]),
-  fSharp(note: "F#", frequencies: [
+  fSharp(note: "F♯", frequencies: [
     739.99,
     1479.98,
     2959.96,
@@ -100,7 +100,7 @@ enum Notes {
     50175.44,
     100350.88,
   ]),
-  gSharp(note: "G#", frequencies: [
+  gSharp(note: "G♯", frequencies: [
     830.61,
     1661.22,
     3322.44,

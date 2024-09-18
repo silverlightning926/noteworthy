@@ -8,9 +8,9 @@ class HomeRoute extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Padding(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: 16,
         ),
         child: Column(
@@ -21,7 +21,7 @@ class HomeRoute extends StatelessWidget {
               note: Notes.aSharp,
               octave: 2,
             ),
-            TuningIndicator(
+            const TuningIndicator(
               cents: 30,
             ),
           ],
