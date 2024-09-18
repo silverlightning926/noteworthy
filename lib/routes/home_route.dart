@@ -1,41 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:noteworthy/components/note_indicator.dart';
 import 'package:noteworthy/components/tuning_indicator.dart';
+import 'package:noteworthy/models/notes.dart';
 
 class HomeRoute extends StatelessWidget {
   const HomeRoute({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(
+        padding: EdgeInsets.symmetric(
           horizontal: 16,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  "A",
-                  style: TextStyle(
-                    fontSize: 175,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  "440 Hz",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.white.withOpacity(0.5),
-                  ),
-                ),
-              ],
+            NoteIndicator(
+              note: Notes.aSharp,
+              octave: 2,
             ),
-            const TuningIndicator(
+            TuningIndicator(
               cents: 30,
             ),
           ],
